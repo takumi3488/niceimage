@@ -1,0 +1,80 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  npm:
+    name: publish-to-npm
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing (OIDC) + provenance
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Verify tag matches package.json version
+        shell: bash
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p 'require("./package.json").version')"
+          if [ "$tag" != "$version" ]; then
+            echo "tag ${GITHUB_REF_NAME} does not match package.json version ${version}" >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        shell: bash
+        run: bun install --frozen-lockfile
+
+      - name: Check format
+        shell: bash
+        run: bun run fmt
+
+      - name: Run lint
+        shell: bash
+        run: bun run lint
+
+      - name: Typecheck
+        shell: bash
+        run: bun run typecheck
+
+      - name: Run tests
+        shell: bash
+        run: bun test
+
+      - name: Verify published tarball
+        shell: bash
+        run: ./scripts/pack_smoke.sh
+
+      # OIDC trusted publishing requires npm >= 11.5.1
+      - name: Update npm
+        shell: bash
+        run: npm install -g npm@latest
+
+      - name: Publish to npm
+        shell: bash
+        run: npm publish
