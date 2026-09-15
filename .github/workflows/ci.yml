@@ -31,9 +31,17 @@ jobs:
         shell: bash
         run: bun run lint
 
+      - name: Typecheck
+        shell: bash
+        run: bun run typecheck
+
       - name: Run tests
         shell: bash
         run: bun test
+
+      - name: Verify published tarball
+        shell: bash
+        run: ./scripts/pack_smoke.sh
 
 
   automerge:
