@@ -43,7 +43,7 @@
 		"@biomejs/biome": "2.5.14",
 		"@types/bun": "latest",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
-		"oxlint": "1.85.0"
+		"oxlint": "1.86.0"
 	},
 	"dependencies": {
 		"@earendil-works/pi-ai": "^0.87.0",
