@@ -46,7 +46,7 @@
 		"oxlint": "1.87.0"
 	},
 	"dependencies": {
-		"@earendil-works/pi-ai": "^0.99.0",
+		"@earendil-works/pi-ai": "^1.0.0",
 		"@earendil-works/pi-coding-agent": "^0.99.0",
 		"@resvg/resvg-wasm": "^2.6.2",
 		"satori": "^0.36.0",
