@@ -32,3 +32,8 @@ bun run lint     # oxlint (`lint:fix` to fix)
 bun run typecheck
 ./scripts/pack_smoke.sh  # pack the tarball, install it, run the CLI + a render from node_modules
 ```
+
+## Support
+
+If you find niceimage useful, consider [sponsoring takumi3488](https://github.com/sponsors/takumi3488)
+to support its development and maintenance.
