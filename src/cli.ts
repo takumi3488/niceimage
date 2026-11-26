@@ -20,6 +20,7 @@ Options:
   -H, --height <px>       canvas height (default 630)
       --scale <n>         PNG raster scale, e.g. 2 for @2x (default 1)
   -m, --model <spec>      pi model, e.g. anthropic/claude-opus-4-5:high (default: pi settings default)
+      --allow-read        enable Pi's built-in read tool (default: off)
       --max-renders <n>   max render_image calls (default 3)
       --code <path>       also write the final TSX module here (rewritten every turn)
       --open / --no-open  open the output in the OS image viewer after the first render
@@ -94,6 +95,7 @@ function parseCliArgs() {
 				height: { type: "string", short: "H", default: "630" },
 				scale: { type: "string", default: "1" },
 				model: { type: "string", short: "m" },
+				"allow-read": { type: "boolean" },
 				"max-renders": { type: "string", default: "3" },
 				code: { type: "string" },
 				open: { type: "boolean" },
@@ -175,6 +177,7 @@ try {
 		scale,
 		maxRenders,
 		model: parsed.values.model,
+		allowRead: parsed.values["allow-read"],
 		cwd: process.cwd(),
 		log,
 	});
