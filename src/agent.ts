@@ -21,6 +21,7 @@ export type GeneratorOptions = {
 	scale: number;
 	maxRenders: number;
 	model?: string;
+	allowRead?: boolean;
 	cwd: string;
 	log: (line: string) => void;
 };
@@ -105,7 +106,7 @@ export async function createGenerator(o: GeneratorOptions): Promise<Generator> {
 		thinkingLevel: resolved?.thinkingLevel,
 		modelRuntime,
 		resourceLoader: loader,
-		tools: ["render_image"],
+		tools: o.allowRead === true ? ["render_image", "read"] : ["render_image"],
 		customTools: [renderTool],
 		sessionManager: SessionManager.inMemory(o.cwd),
 	});
