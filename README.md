@@ -6,6 +6,9 @@
 
 [Bun](https://bun.sh) >= 1.2. The CLI ships as TypeScript and is executed by Bun directly (`#!/usr/bin/env bun`); Node.js is not supported.
 
+On a cold font cache, rendering downloads Noto fonts from GitHub and emoji
+assets from cdnjs as needed.
+
 ## Install
 
 ```sh
@@ -32,6 +35,8 @@ bun run lint     # oxlint (`lint:fix` to fix)
 bun run typecheck
 ./scripts/pack_smoke.sh  # pack the tarball, install it, run the CLI + a render from node_modules
 ```
+
+Renderer tests and the tarball smoke render use local font and emoji fixtures.
 
 ## Support
 

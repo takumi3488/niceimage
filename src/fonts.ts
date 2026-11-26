@@ -8,7 +8,8 @@ export const CACHE_DIR =
 	join(process.env.XDG_CACHE_HOME ?? join(homedir(), ".cache"), "nimg");
 const FONT_DIR = join(CACHE_DIR, "fonts");
 const EMOJI_DIR = join(CACHE_DIR, "emoji");
-const NOTO = "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts";
+const NOTO =
+	"https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts";
 const CJK =
 	"https://github.com/notofonts/noto-cjk/raw/Sans2.004/Sans/SubsetOTF";
 const TWEMOJI = "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg";
