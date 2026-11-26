@@ -33,6 +33,6 @@ EOF
 cd "$work"
 bun add "$root/$tarball" >/dev/null
 ./node_modules/.bin/nimg --help | grep -q '^Usage: nimg'
-bun render.ts
+bun --preload "$root/scripts/test-font-cache.ts" render.ts
 
 echo "pack smoke ok: $tarball"
